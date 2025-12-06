@@ -356,16 +356,13 @@ const About = () => {
               </div>
 
               {/* Skills with AnimatedCounter */}
-              <div
-                id="skill"
-                className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700"
-              >
+              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
                   Technical Skills
                 </h3>
                 <div className="grid grid-cols-2 gap-6">
                   {skills.map((skill, index) => (
-                    <div key={index}>
+                    <div id="skill" key={index}>
                       <div className="flex justify-between mb-2">
                         <span className="font-medium text-gray-700 dark:text-gray-300">
                           {skill.name}
@@ -563,16 +560,13 @@ const About = () => {
             </div>
 
             {/* Skills Mobile */}
-            <div
-              id="skill"
-              className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700"
-            >
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
                 Technical Skills
               </h3>
               <div className="space-y-4">
                 {skills.map((skill, index) => (
-                  <div key={index}>
+                  <div id="skill" key={index}>
                     <div className="flex justify-between mb-2">
                       <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
                         {skill.name}

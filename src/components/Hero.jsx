@@ -61,7 +61,7 @@ const Hero = () => {
     >
       <MyContainer>
         <div className="w-full ">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -75,19 +75,19 @@ const Hero = () => {
               </motion.h2>
               <motion.h1
                 variants={fadeInUp}
-                className="text-5xl md:text-6xl font-black text-white mb-4"
+                className="text-3xl md:text-4xl font-black text-white mb-4"
               >
                 Raikatun Naim Maimuna
               </motion.h1>
               <motion.h3
                 variants={fadeInUp}
-                className="text-2xl md:text-3xl text-gray-300 font-semibold mb-6"
+                className="text-xl md:text-2xl text-gray-300 font-semibold mb-6"
               >
                 Full Stack Web Developer
               </motion.h3>
               <motion.p
                 variants={fadeInUp}
-                className="text-gray-400 mb-8 text-lg"
+                className="text-gray-400 mb-8 text-base md:text-lg"
               >
                 Crafting beautiful, functional web experiences with modern
                 technologies. Specializing in MERN stack development.
@@ -141,7 +141,7 @@ const Hero = () => {
               className="flex justify-center"
             >
               <div className="relative">
-                <div className="w-80 h-80 bg-linear-to-br from-blue-400 to-purple-500 rounded-full overflow-hidden shadow-2xl">
+                <div className="w-40 h-40 md:w-80 md:h-80 bg-linear-to-br from-blue-400 to-purple-500 rounded-full overflow-hidden shadow-2xl">
                   <img
                     src={myImage}
                     alt="Raikatun Naim Maimuna"
@@ -155,9 +155,9 @@ const Hero = () => {
                     scale: { delay: 0.5, type: "spring", stiffness: 200 },
                     rotate: { duration: 20, repeat: Infinity, ease: "linear" },
                   }}
-                  className="absolute -bottom-4 -right-4 w-24 h-24 bg-orange-400 rounded-full flex items-center justify-center text-white shadow-xl"
+                  className="absolute -bottom-2 md:-bottom-4 -right-2 md:-right-4 w-10 h-10 md:w-24 md:h-24 bg-orange-400 rounded-full flex items-center justify-center text-white shadow-xl"
                 >
-                  <FaCode className="text-4xl" />
+                  <FaCode className="text-2xl md:text-4xl" />
                 </motion.div>
               </div>
             </motion.div>
