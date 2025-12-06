@@ -12,7 +12,7 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   };
 
-  const menuItems = ["home", "about", "skills", "projects", "contact"];
+  const menuItems = ["home", "about","skill", "projects", "contact"];
 
   return (
     <motion.nav

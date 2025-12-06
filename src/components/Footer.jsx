@@ -1,12 +1,16 @@
 import React from 'react';
 import MyContainer from './container/MyContainer';
+import Logo from './Logo';
 
 const Footer = () => {
     return (
       <div>
         <footer className="bg-gray-900 text-white py-8 px-4">
           <MyContainer className={"text-center"}>
-            <p className="mb-4">&copy; 2024 Your Name. All rights reserved.</p>
+            <div className="flex justify-center items-center my-5">
+              <Logo />
+            </div>
+
             <div className="flex justify-center gap-6">
               <a
                 href="https://github.com/maimuna03134/"
@@ -32,8 +36,8 @@ const Footer = () => {
               >
                 Facebook
               </a>
-            
             </div>
+            <p className="mt-4">&copy; 2024 Your Name. All rights reserved.</p>
           </MyContainer>
         </footer>
       </div>

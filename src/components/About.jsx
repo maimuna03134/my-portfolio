@@ -25,33 +25,34 @@ import {
 import myImage from "../assets/image averter.jpg";
 import toast from "react-hot-toast";
 import MyContainer from "./container/MyContainer";
+import AnimatedCounter from "./animations/AnimatedCounter";
 
 // AnimatedCounter Component
-const AnimatedCounter = ({ end, duration = 2 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
+// const AnimatedCounter = ({ end, duration = 2 }) => {
+//   const ref = useRef(null);
+//   const isInView = useInView(ref, { once: true });
+//   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    if (isInView) {
-      let startTime;
-      const animate = (currentTime) => {
-        if (!startTime) startTime = currentTime;
-        const progress = (currentTime - startTime) / (duration * 1000);
+//   useEffect(() => {
+//     if (isInView) {
+//       let startTime;
+//       const animate = (currentTime) => {
+//         if (!startTime) startTime = currentTime;
+//         const progress = (currentTime - startTime) / (duration * 1000);
 
-        if (progress < 1) {
-          setCount(Math.floor(end * progress));
-          requestAnimationFrame(animate);
-        } else {
-          setCount(end);
-        }
-      };
-      requestAnimationFrame(animate);
-    }
-  }, [isInView, end, duration]);
+//         if (progress < 1) {
+//           setCount(Math.floor(end * progress));
+//           requestAnimationFrame(animate);
+//         } else {
+//           setCount(end);
+//         }
+//       };
+//       requestAnimationFrame(animate);
+//     }
+//   }, [isInView, end, duration]);
 
-  return <span ref={ref}>{count}%</span>;
-};
+//   return <span ref={ref}>{count}%</span>;
+// };
 
 // Social Links Data
 const socialLinks = {
@@ -65,17 +66,8 @@ const socialLinks = {
 
 const About = () => {
 
-    const handleDownloadResume = () => {
-      // Google Drive direct download link
-      const driveLink =
-        "https://drive.google.com/uc?export=download&id=1oezmBZSw2al-Ly7NVNRsOwuB-XmiS1eX";
 
-      // Open in new tab
-      window.open(driveLink, "_blank");
-
-      toast.success("Resume download started!");
-    };
-  const [activeTab, setActiveTab] = useState("home");
+//   const [activeTab, setActiveTab] = useState("home");
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -153,12 +145,7 @@ const About = () => {
     { name: "Next.js", level: 85 },
   ];
 
-  const navItems = [
-    { id: "home", label: "Home", icon: <FaHome /> },
-    { id: "resume", label: "Resume", icon: <FaFileAlt /> },
-    { id: "work", label: "Work", icon: <FaBriefcase /> },
-    { id: "contact", label: "Contact", icon: <FaEnvelopeOpen /> },
-  ];
+
 
   // Social media configuration with icons
   const socialMedia = [
@@ -189,7 +176,10 @@ const About = () => {
   ];
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen font-sans text-gray-800 dark:text-gray-200">
+    <div
+      id="about"
+      className="bg-gray-50 dark:bg-gray-900 min-h-screen font-sans text-gray-800 dark:text-gray-200 py-20"
+    >
       <MyContainer className={"py-6"}>
         {/* Desktop & Tablet Layout */}
         <div className="hidden lg:grid lg:grid-cols-12 gap-8 mt-12">
@@ -267,6 +257,11 @@ const About = () => {
                 },
               ].map((contact, index) => (
                 <motion.div
+                  onClick={() => {
+                    document.getElementById("contact")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
                   key={index}
                   className="flex items-center gap-4"
                   whileHover={{ x: 5 }}
@@ -301,6 +296,11 @@ const About = () => {
                   boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
                 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  document.getElementById("home")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
               >
                 <FaDownload />
                 Download Resume
@@ -315,28 +315,6 @@ const About = () => {
             animate="visible"
             variants={containerVariants}
           >
-            {/* Navigation */}
-            <motion.div className="flex justify-end" variants={itemVariants}>
-              <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-xl flex gap-2">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.id}
-                    onClick={() => setActiveTab(item.id)}
-                    className={`px-6 py-3 rounded-lg font-medium flex items-center gap-2 ${
-                      activeTab === item.id
-                        ? "bg-linear-to-r from-orange-500 to-red-500 text-white shadow-sm"
-                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
-                    }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item.icon}
-                    {item.label}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-
             {/* About Me Section */}
             <motion.section
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
@@ -378,7 +356,10 @@ const About = () => {
               </div>
 
               {/* Skills with AnimatedCounter */}
-              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <div
+                id="skill"
+                className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700"
+              >
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
                   Technical Skills
                 </h3>
@@ -488,6 +469,11 @@ const About = () => {
 
           {/* Contact & Download */}
           <motion.div
+            onClick={() => {
+              document.getElementById("contact")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 space-y-5"
             variants={itemVariants}
           >
@@ -535,34 +521,20 @@ const About = () => {
               className="w-full py-3 bg-linear-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl flex items-center justify-center gap-2"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleDownloadResume}
+              onClick={() => {
+                document.getElementById("home")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
             >
               <FaDownload />
               Download Resume
             </motion.button>
           </motion.div>
 
-          {/* Navigation */}
-          <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-xl flex justify-around overflow-x-auto">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`px-4 py-2 rounded-lg flex flex-col items-center gap-1 ${
-                  activeTab === item.id
-                    ? "bg-linear-to-r from-orange-500 to-red-500 text-white"
-                    : "text-gray-600 dark:text-gray-400"
-                }`}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.icon}
-                <span className="text-xs">{item.label}</span>
-              </motion.button>
-            ))}
-          </div>
-
           {/* About */}
           <motion.section
+            id="about"
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
             variants={itemVariants}
           >
@@ -591,7 +563,10 @@ const About = () => {
             </div>
 
             {/* Skills Mobile */}
-            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div
+              id="skill"
+              className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700"
+            >
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
                 Technical Skills
               </h3>

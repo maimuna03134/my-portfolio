@@ -52,7 +52,7 @@ const Projects = () => {
                 key={project.id}
                 variants={scaleIn}
                 whileHover={{ y: -10, scale: 1.03 }}
-                className="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 "
+                className="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
               >
                 <div className="h-48 overflow-hidden">
                   <motion.img
@@ -63,7 +63,7 @@ const Projects = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-xl font-bold text-white mb-3">
                     {project.name}
                   </h3>
@@ -74,7 +74,7 @@ const Projects = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedProject(project)}
-                    className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition"
+                    className="mt-auto w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition"
                   >
                     View Details <IoMdArrowForward />
                   </motion.button>
