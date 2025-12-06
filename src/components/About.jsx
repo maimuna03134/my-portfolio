@@ -252,7 +252,7 @@ const About = () => {
                 {
                   icon: <FaMapMarkerAlt />,
                   label: "Location",
-                  value: "Dhaka, Bangladesh",
+                  value: "Chattogram, Chattogram Sadar, Wazedia, Bangladesh",
                   color: "red",
                 },
               ].map((contact, index) => (
@@ -490,7 +490,7 @@ const About = () => {
               {
                 icon: <FaMapMarkerAlt />,
                 label: "Location",
-                value: "Dhaka, Bangladesh",
+                value: "Chattogram, Chattogram Sadar, Wazedia, Bangladesh",
               },
             ].map((contact, index) => (
               <div key={index} className="flex items-center gap-4">
