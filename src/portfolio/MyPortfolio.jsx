@@ -16,7 +16,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import { IoMdArrowForward } from "react-icons/io";
-import MyContainer from "../component/MyContainer";
+import MyContainer from "../components/container/MyContainer";
 
 const MyPortfolio = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
