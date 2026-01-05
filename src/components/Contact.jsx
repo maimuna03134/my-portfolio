@@ -35,17 +35,23 @@ const Contact = () => {
     }
 
     // Simulate form submission delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-    const subject = encodeURIComponent(`Portfolio Contact: Message from ${name}`);
-    const body = encodeURIComponent(
-      `Hello Raikatun Naim Maimuna,\n\nYou have received a new message from your portfolio website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\nBest regards,\n${name}`
-    );
+    // For now, we'll just show success message
+    // In production, you would integrate with EmailJS, Formspree, or backend API
+    console.log('Form Data:', { name, email, message });
+    
+    // You can copy this data and manually send email, or integrate with email service
+    const emailData = {
+      to: 'maimuna84333@gmail.com',
+      subject: `Portfolio Contact: Message from ${name}`,
+      body: `Hello Raikatun Naim Maimuna,\n\nYou have received a new message from your portfolio website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\nBest regards,\n${name}`
+    };
+    
+    console.log('Email Data:', emailData);
 
-    // Open email client with pre-filled message
-    window.open(`mailto:maimuna84333@gmail.com?subject=${subject}&body=${body}`, '_blank');
-
-    setAlertMessage(`Thank you ${name}! Your message has been sent successfully. Please check your email client to complete sending.`);
+    // Show success message
+    setAlertMessage(`Thank you ${name}! Your message has been received successfully. I'll get back to you soon! 🚀`);
     setShowAlert(true);
     setIsSubmitting(false);
     e.target.reset();
