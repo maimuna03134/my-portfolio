@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import './App.css'
 
@@ -10,11 +11,27 @@ import Education from './components/Education';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import MouseAnimations from './components/MouseAnimations';
 
 function App() {
+  useEffect(() => {
+    // Hide default cursor on desktop for custom cursor
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!isMobile) {
+      document.body.style.cursor = 'none';
+    }
+
+    return () => {
+      document.body.style.cursor = 'auto';
+    };
+  }, []);
+
   return (
     <ThemeProvider>
       <div className="min-h-screen relative">
+        {/* Mouse Animations - Only on desktop */}
+        <MouseAnimations />
+        
         {/* Glass Morphism Background */}
         <div className="fixed inset-0 -z-10">
           {/* Base gradient */}

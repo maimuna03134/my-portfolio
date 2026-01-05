@@ -242,7 +242,7 @@ const Hero = () => {
               >
                 <motion.button
                   onClick={handleDownloadResume}
-                  className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 interactive"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -254,7 +254,7 @@ const Hero = () => {
                 
                 <motion.button
                   onClick={() => scrollToSection("contact")}
-                  className="px-8 py-4 glass border-2 border-gray-400/30 dark:border-gray-500/30 text-gray-800 dark:text-gray-100 rounded-2xl font-semibold hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-all duration-300 text-enhanced"
+                  className="px-8 py-4 glass border-2 border-gray-400/30 dark:border-gray-500/30 text-gray-800 dark:text-gray-100 rounded-2xl font-semibold hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-all duration-300 text-enhanced interactive"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
