@@ -10,7 +10,7 @@ import {
   FaCoffee,
   FaHeart
 } from "react-icons/fa";
-import myImage from "../assets/image averter.jpg";
+import myImage from "../assets/image.jpeg";
 import MyContainer from "./container/MyContainer";
 
 const About = () => {

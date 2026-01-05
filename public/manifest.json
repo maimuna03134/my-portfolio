@@ -1,0 +1,21 @@
+{
+  "name": "Raikatun Naim Maimuna - Frontend Developer",
+  "short_name": "Raikatun Naim",
+  "description": "Frontend Developer Portfolio - Specializing in React.js, JavaScript, and modern web technologies",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

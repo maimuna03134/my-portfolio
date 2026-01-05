@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { socialLinks } from "../data/portfolioData";
-import myImage from '../assets/image averter.jpg';
+import myImage from '../assets/image.jpeg';
 import MyContainer from "./container/MyContainer";
 
 const Hero = () => {
