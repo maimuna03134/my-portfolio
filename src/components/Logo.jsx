@@ -53,7 +53,7 @@ const Logo = ({ className = "", size = "default" }) => {
       {/* Name Text */}
       <div className="flex flex-col leading-tight">
         <span className={`${currentSize.text} font-bold text-gray-900 dark:text-white text-enhanced`}>
-          Raikatun
+          maimuna.
         </span>
         <span className="text-xs text-blue-600 dark:text-blue-400 font-medium -mt-1">
           Frontend Dev
