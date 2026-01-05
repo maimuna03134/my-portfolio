@@ -56,11 +56,36 @@ export const skillsData = {
 };
 
 export const projectsData = [
-  {
+   {
     id: 1,
+    name: "StyleDecor – Smart Home & Ceremony Decoration Booking System",
+    image:
+      "https://i.ibb.co.com/XrtCsgTb/Style-Decor-cover-page.jpg",
+    shortDescription: "Online home & ceremony decoration booking platform with secure payments",
+    technologies: [
+    "React",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "JavaScript",
+    "Tailwind CSS",
+    "Firebase",
+    "Stripe"
+  ],
+    fullDescription:
+      "StyleDecor is a full-stack web application that allows users to browse decoration services, book professional decorators, make secure online payments, and track booking status in real time through role-based dashboards.",
+    liveLink: "https://smart-home-decoration-service.web.app/",
+    githubLink: "https://github.com/maimuna03134/Smart-Home-Ceremony-Decoration-Service-Client-.git",
+    challenges:
+      "Managing role-based access control for users, admins, and decorators along with real-time booking status updates was challenging. I solved this by implementing JWT-based authentication and structured dashboard permissions.",
+    improvements:
+      "Future improvements include adding live chat with decorators, AI-based decorator recommendations, and a mobile app version.",
+  },
+  {
+    id: 2,
     name: "WarmPaws – Pet Care in Winter",
     image:
-      "https://i.ibb.co.com/Qj9xSZnK/Whats-App-Image-2025-12-06-at-5-06-41-AM.jpg",
+      "https://i.ibb.co.com/DH7c5bpf/warmspaw.jpg",
     shortDescription: "Complete pet care service platform with booking system",
     technologies: ["React", " JavaScript", "Firebase"],
     fullDescription:
@@ -73,10 +98,10 @@ export const projectsData = [
       "Planning to add payment gateway integration, pet health record tracking, and a mobile app version.",
   },
   {
-    id: 2,
+    id: 3,
     name: "KrishiLink – Farmer's Growth & Connection Platform",
     image:
-      "https://i.ibb.co.com/355dPM6t/Whats-App-Image-2025-12-06-at-5-14-29-AM.jpg",
+      "https://i.ibb.co.com/nNVD6T1d/krishilink.jpg",
     shortDescription:
       "KrishiLink connects farmers, traders, and consumers to share crops and collaborate easily.",
     technologies: ["React", " Node.js", "Express.js", "Mongodb"],
@@ -91,10 +116,10 @@ export const projectsData = [
       "Future plans include adding AI-powered sales predictions and automated inventory alerts.",
   },
   {
-    id: 3,
+    id: 4,
     name: "FreshBite – Food Ordering Website ",
     image:
-      "https://i.ibb.co.com/qLQPxqSf/Whats-App-Image-2025-12-06-at-5-12-11-AM.jpg ",
+      "https://i.ibb.co.com/NdVmZF4t/freshbite.jpg",
     shortDescription:
       "FreshBite is a seamless and engaging food ordering platform with a vibrant, responsive design.",
     technologies: ["React", "Firebase", "tailwindcss"],
@@ -111,7 +136,7 @@ export const projectsData = [
 
 export const socialLinks = {
   github: "https://github.com/maimuna03134/",
-  linkedin: "http://www.linkedin.com/in/raikatun-naim-webdev",
+  linkedin: "https://www.linkedin.com/in/raikatun-naim",
   facebook: "https://www.facebook.com/share/1EvtWr2QGL/",
   email: "maimuna84333@gmail.com",
   phone: "+8801860687868",

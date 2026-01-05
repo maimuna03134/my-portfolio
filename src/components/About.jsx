@@ -1,628 +1,330 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import {
-  FaFacebook,
-  FaLinkedin,
-  FaTwitter,
-  FaGithub,
-  FaPhone,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaDownload,
-  FaHome,
-  FaFileAlt,
-  FaBriefcase,
-  FaEnvelopeOpen,
   FaCode,
-  FaMobileAlt,
-  FaPalette,
-  FaUsers,
-  FaWhatsapp,
   FaServer,
   FaDatabase,
-  FaRocket,
+  FaMobile,
+  FaLaptopCode,
+  FaGraduationCap,
+  FaAward,
+  FaCoffee,
+  FaHeart
 } from "react-icons/fa";
 import myImage from "../assets/image averter.jpg";
-import toast from "react-hot-toast";
 import MyContainer from "./container/MyContainer";
-import AnimatedCounter from "./animations/AnimatedCounter";
-
-// AnimatedCounter Component
-// const AnimatedCounter = ({ end, duration = 2 }) => {
-//   const ref = useRef(null);
-//   const isInView = useInView(ref, { once: true });
-//   const [count, setCount] = useState(0);
-
-//   useEffect(() => {
-//     if (isInView) {
-//       let startTime;
-//       const animate = (currentTime) => {
-//         if (!startTime) startTime = currentTime;
-//         const progress = (currentTime - startTime) / (duration * 1000);
-
-//         if (progress < 1) {
-//           setCount(Math.floor(end * progress));
-//           requestAnimationFrame(animate);
-//         } else {
-//           setCount(end);
-//         }
-//       };
-//       requestAnimationFrame(animate);
-//     }
-//   }, [isInView, end, duration]);
-
-//   return <span ref={ref}>{count}%</span>;
-// };
-
-// Social Links Data
-const socialLinks = {
-  github: "https://github.com/maimuna03134/",
-  linkedin: "http://www.linkedin.com/in/raikatun-naim-webdev",
-  facebook: "https://www.facebook.com/share/1EvtWr2QGL/",
-  email: "maimuna84333@gmail.com",
-  phone: "+8801860687868",
-  whatsapp: "8801860687868",
-};
 
 const About = () => {
-
-
-//   const [activeTab, setActiveTab] = useState("home");
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5,
+        duration: 0.6,
+        ease: "easeOut",
       },
     },
   };
 
-  const paragraphs = [
-    {
-      title: "My Programming Journey:",
-      text: "I started my coding journey 2 years ago when I discovered the magic of building things on the web. What began as curiosity quickly turned into a passion. I dove deep into HTML, CSS, and JavaScript, and eventually mastered the MERN stack (MongoDB, Express.js, React.js, Node.js).",
-      icon: <FaRocket className="text-orange-500" />,
-    },
-    {
-      title: "What I Love to Do:",
-      text: "I enjoy building full-stack web applications that solve real-world problems. There's something incredibly satisfying about taking an idea from concept to deployment. I love working on both frontend and backend, creating seamless user experiences while ensuring robust server-side functionality.",
-      icon: <FaCode className="text-red-500" />,
-    },
-    {
-      title: "My Approach:",
-      text: "I believe in writing clean, maintainable code and staying updated with the latest web technologies. I'm a strong advocate for responsive design and always ensure my applications work flawlessly across all devices.",
-      icon: <FaPalette className="text-orange-500" />,
-    },
-    {
-      title: "Beyond Coding:",
-      text: "When I'm not coding, you'll find me playing cricket with friends, exploring new cafes in the city, or binge-watching tech tutorials on YouTube. I'm also passionate about photography and love capturing moments during my travels.",
-      icon: <FaUsers className="text-red-500" />,
-    },
+  const skills = [
+    { name: "Frontend Development", percentage: 95, color: "from-blue-500 to-cyan-500" },
+    { name: "Backend Development", percentage: 88, color: "from-green-500 to-emerald-500" },
+    { name: "UI/UX Design", percentage: 82, color: "from-purple-500 to-pink-500" },
+    { name: "Problem Solving", percentage: 92, color: "from-orange-500 to-red-500" },
   ];
 
   const services = [
     {
-      icon: <FaCode className="text-3xl text-red-500" />,
+      icon: <FaLaptopCode className="text-4xl" />,
       title: "Frontend Development",
-      description:
-        "Specializing in React.js and Next.js to build fast, responsive, and modern web applications. I create intuitive user interfaces with smooth animations and seamless interactions using the latest frontend technologies.",
-      bgColor: "bg-orange-50 dark:bg-orange-900/30",
+      description: "Creating responsive, interactive user interfaces with React, Next.js, and modern CSS frameworks.",
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
-      icon: <FaServer className="text-3xl text-orange-500" />,
+      icon: <FaServer className="text-4xl" />,
       title: "Backend Development",
-      description:
-        "Building robust server-side applications with Node.js and Express.js. I design RESTful APIs, handle authentication, and ensure your application's backend is secure, scalable, and efficient.",
-      bgColor: "bg-gray-100 dark:bg-gray-900/40",
+      description: "Building robust APIs and server-side applications with Node.js, Express, and database management.",
+      gradient: "from-green-500 to-emerald-500",
     },
-    
     {
-      icon: <FaRocket className="text-3xl text-red-500" />,
+      icon: <FaMobile className="text-4xl" />,
+      title: "Responsive Design",
+      description: "Ensuring seamless user experience across all devices with mobile-first design principles.",
+      gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: <FaDatabase className="text-4xl" />,
       title: "Full-Stack Solutions",
-      description:
-        "End-to-end web application development using the MERN stack. From initial concept to deployment, I handle every aspect of your project, delivering production-ready applications that solve real-world problems.",
-      bgColor: "bg-orange-50 dark:bg-orange-900/30",
+      description: "End-to-end web application development from concept to deployment and maintenance.",
+      gradient: "from-orange-500 to-red-500",
     },
   ];
 
-  const skills = [
-    { name: "React.js", level: 95 },
-    { name: "Node.js", level: 90 },
-    { name: "MongoDB", level: 88 },
-    { name: "Next.js", level: 85 },
-  ];
-
-
-
-  // Social media configuration with icons
-  const socialMedia = [
-    {
-      icon: <FaFacebook />,
-      color: "text-blue-600",
-      bg: "bg-blue-50 dark:bg-blue-900/40",
-      url: socialLinks.facebook,
-    },
-    {
-      icon: <FaLinkedin />,
-      color: "text-blue-700",
-      bg: "bg-blue-50 dark:bg-blue-900/40",
-      url: socialLinks.linkedin,
-    },
-    {
-      icon: <FaWhatsapp />,
-      color: "text-green-500",
-      bg: "bg-green-50 dark:bg-green-900/40",
-      url: `https://wa.me/${socialLinks.whatsapp}`,
-    },
-    {
-      icon: <FaGithub />,
-      color: "text-gray-800 dark:text-gray-200",
-      bg: "bg-gray-100 dark:bg-gray-700",
-      url: socialLinks.github,
-    },
+  const achievements = [
+    { number: "2+", label: "Years Experience", icon: <FaGraduationCap /> },
+    { number: "15+", label: "Projects Completed", icon: <FaAward /> },
+    { number: "100+", label: "Cups of Coffee", icon: <FaCoffee /> },
+    { number: "∞", label: "Lines of Code", icon: <FaCode /> },
   ];
 
   return (
-    <div
-      id="about"
-      className="bg-gray-50 dark:bg-gray-900 min-h-screen font-sans text-gray-800 dark:text-gray-200 py-20"
-    >
-      <MyContainer className={"py-6"}>
-        {/* Desktop & Tablet Layout */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-8 mt-12">
-          {/* Left Sidebar */}
-          <motion.aside
-            className="lg:col-span-4 space-y-8"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {/* Profile Card */}
-            <motion.div
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center -mt-20"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
-              <motion.img
-                src={myImage}
-                alt="Raikatun Naim Maimuna"
-                className="w-40 h-40 rounded-2xl mx-auto ring-8 ring-white dark:ring-gray-800 object-cover"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-              <h1 className="text-xl font-bold mt-6 text-gray-900 dark:text-white">
-                Raikatun Naim Maimuna
-              </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Full Stack Web Developer
-              </p>
-
-              {/* Social Links */}
-              <div className="flex justify-center gap-3 mt-6">
-                {socialMedia.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 ${social.bg} rounded-xl flex items-center justify-center ${social.color}`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {React.cloneElement(social.icon, { className: "text-xl" })}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Contact Info Card */}
-            <motion.div
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 space-y-6"
-              variants={itemVariants}
-            >
-              {[
-                {
-                  icon: <FaPhone />,
-                  label: "Phone",
-                  value: socialLinks.phone,
-                  color: "red",
-                  link: `tel:${socialLinks.phone}`,
-                },
-                {
-                  icon: <FaEnvelope />,
-                  label: "Email",
-                  value: socialLinks.email,
-                  color: "orange",
-                  link: `mailto:${socialLinks.email}`,
-                },
-                {
-                  icon: <FaMapMarkerAlt />,
-                  label: "Location",
-                  value: "Chattogram, Chattogram Sadar, Wazedia, Bangladesh",
-                  color: "red",
-                },
-              ].map((contact, index) => (
-                <motion.div
-                  onClick={() => {
-                    document.getElementById("contact")?.scrollIntoView({
-                      behavior: "smooth",
-                    });
-                  }}
-                  key={index}
-                  className="flex items-center gap-4"
-                  whileHover={{ x: 5 }}
-                >
-                  <div
-                    className={`w-12 h-12 bg-${contact.color}-100 dark:bg-${contact.color}-900/40 rounded-xl flex items-center justify-center`}
-                  >
-                    {React.cloneElement(contact.icon, {
-                      className: `text-${contact.color}-500 text-xl`,
-                    })}
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500">{contact.label}</p>
-                    {contact.link ? (
-                      <a
-                        href={contact.link}
-                        className="font-medium text-sm hover:text-orange-500 transition-colors break-all"
-                      >
-                        {contact.value}
-                      </a>
-                    ) : (
-                      <p className="font-medium text-sm">{contact.value}</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-
-              <motion.button
-                className="w-full py-3 bg-linear-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl shadow-md flex items-center justify-center gap-2"
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  document.getElementById("home")?.scrollIntoView({
-                    behavior: "smooth",
-                  });
-                }}
-              >
-                <FaDownload />
-                Download Resume
-              </motion.button>
-            </motion.div>
-          </motion.aside>
-
-          {/* Right Content */}
-          <motion.main
-            className="lg:col-span-8 space-y-10"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
-            {/* About Me Section */}
-            <motion.section
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                ABOUT ME
-              </h2>
-              <motion.div
-                className="w-20 h-1 bg-linear-to-r from-orange-500 to-red-500 mt-3"
-                initial={{ width: 0 }}
-                animate={{ width: 80 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
-
-              <div className="mt-8 space-y-6">
-                {paragraphs.map((paragraph, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className="flex gap-4"
-                  >
-                    <div className="shrink-0 w-10 h-10 bg-linear-to-br from-orange-100 to-red-100 dark:from-orange-900/40 dark:to-red-900/40 rounded-lg flex items-center justify-center">
-                      {paragraph.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
-                        {paragraph.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {paragraph.text}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Skills with AnimatedCounter */}
-              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-                  Technical Skills
-                </h3>
-                <div className="grid grid-cols-2 gap-6">
-                  {skills.map((skill, index) => (
-                    <div id="skill" key={index}>
-                      <div className="flex justify-between mb-2">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">
-                          {skill.name}
-                        </span>
-                        <span className="font-bold text-orange-500">
-                          <AnimatedCounter end={skill.level} duration={2} />
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <motion.div
-                          className="bg-linear-to-r from-orange-500 to-red-500 h-2 rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1.5, delay: 0.5 }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.section>
-
-            {/* What I Do Section */}
-            <motion.section
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
-              variants={itemVariants}
-            >
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                What I do!
-              </h2>
-              <motion.div
-                className="w-20 h-1 bg-linear-to-r from-orange-500 to-red-500 mt-3"
-                initial={{ width: 0 }}
-                animate={{ width: 80 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                {services.map((service, index) => (
-                  <motion.div
-                    key={index}
-                    className={`${service.bgColor} p-6 rounded-2xl`}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.03, y: -5 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <h3 className="font-bold text-lg flex items-center gap-3 text-gray-900 dark:text-white">
-                      {service.icon}
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 text-gray-600 dark:text-gray-400 text-sm">
-                      {service.description}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.section>
-          </motion.main>
-        </div>
-
-        {/* Mobile Layout */}
+    <section id="about" className="relative py-20 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
         <motion.div
-          className="lg:hidden space-y-6 mt-8"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {/* Profile Card */}
-          <motion.div
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center"
-            variants={itemVariants}
-          >
-            <img
-              src={myImage}
-              alt="Raikatun Naim Maimuna"
-              className="w-32 h-32 rounded-2xl mx-auto object-cover"
-            />
-            <h1 className="text-2xl font-bold mt-6 text-gray-900 dark:text-white">
-              Raikatun Naim Maimuna
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400">
-              Full Stack Web Developer
-            </p>
-            <div className="flex justify-center gap-3 mt-4">
-              {socialMedia.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-10 h-10 ${social.bg} rounded-lg flex items-center justify-center ${social.color}`}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {React.cloneElement(social.icon, { className: "text-lg" })}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-400/10 dark:bg-purple-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.6, 0.3, 0.6],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+          }}
+        />
+      </div>
 
-          {/* Contact & Download */}
+      <MyContainer>
+        <div className="relative z-10">
+          {/* Header */}
           <motion.div
-            onClick={() => {
-              document.getElementById("contact")?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 space-y-5"
-            variants={itemVariants}
+            initial={{ opacity: 0, y: -50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
           >
-            {[
-              {
-                icon: <FaPhone />,
-                label: "Phone",
-                value: socialLinks.phone,
-                link: `tel:${socialLinks.phone}`,
-              },
-              {
-                icon: <FaEnvelope />,
-                label: "Email",
-                value: socialLinks.email,
-                link: `mailto:${socialLinks.email}`,
-              },
-              {
-                icon: <FaMapMarkerAlt />,
-                label: "Location",
-                value: "Chattogram, Chattogram Sadar, Wazedia, Bangladesh",
-              },
-            ].map((contact, index) => (
-              <div key={index} className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/40 rounded-xl flex items-center justify-center">
-                  {React.cloneElement(contact.icon, {
-                    className: "text-orange-500",
-                  })}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs text-gray-500">{contact.label}</p>
-                  {contact.link ? (
-                    <a
-                      href={contact.link}
-                      className="font-medium text-sm hover:text-orange-500 transition-colors break-all"
-                    >
-                      {contact.value}
-                    </a>
-                  ) : (
-                    <p className="font-medium text-sm">{contact.value}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-            <motion.button
-              className="w-full py-3 bg-linear-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                document.getElementById("home")?.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }}
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-block px-6 py-2 bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/30 rounded-full mb-8"
             >
-              <FaDownload />
-              Download Resume
-            </motion.button>
+              <span className="text-blue-600 dark:text-blue-400 text-sm font-medium tracking-wider">
+                👨‍💻 About Me
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 text-enhanced"
+            >
+              Know More <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">About Me</span>
+            </motion.h2>
           </motion.div>
 
-          {/* About */}
-          <motion.section
-            id="about"
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
-            variants={itemVariants}
-          >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              ABOUT ME
-            </h2>
-            <div className="w-16 h-1 bg-linear-to-r from-orange-500 to-red-500 mt-2" />
+          {/* Main Content */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20">
+            {/* Left - Image & Stats */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              className="space-y-6 lg:space-y-8"
+            >
+              {/* Profile Image */}
+              <motion.div
+                variants={itemVariants}
+                className="relative max-w-xs sm:max-w-sm md:max-w-md mx-auto"
+              >
+                <div className="relative">
+                  {/* Main Image */}
+                  <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl rotate-6" />
+                    <div className="relative w-full h-full glass backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl border border-white/30 dark:border-white/20">
+                      <img
+                        src={myImage}
+                        alt="Raikatun Naim Maimuna"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    </div>
+                  </div>
 
-            <div className="mt-6 space-y-5">
-              {paragraphs.map((paragraph, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
-                >
-                  <h3 className="font-bold text-base text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                    {paragraph.icon}
-                    {paragraph.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                    {paragraph.text}
+                  {/* Floating Elements */}
+                  <motion.div
+                    className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg"
+                    animate={{
+                      rotate: [0, 360],
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 2, repeat: Infinity },
+                    }}
+                  >
+                    <FaCode className="text-xl text-white" />
+                  </motion.div>
+
+                  <motion.div
+                    className="absolute -bottom-4 -left-4 w-14 h-14 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg"
+                    animate={{
+                      y: [-10, 10, -10],
+                      rotate: [-5, 5, -5],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                    }}
+                  >
+                    <FaHeart className="text-lg text-white" />
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Achievement Stats */}
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-2 gap-3 sm:gap-4"
+              >
+                {achievements.map((achievement, index) => (
+                  <motion.div
+                    key={index}
+                    className="glass backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 text-center border border-white/30 dark:border-white/20"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="text-2xl lg:text-3xl text-blue-600 dark:text-blue-400 mb-2">
+                      {achievement.icon}
+                    </div>
+                    <div className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-1 text-enhanced">
+                      {achievement.number}
+                    </div>
+                    <div className="text-xs lg:text-sm text-gray-600 dark:text-gray-300 text-enhanced">
+                      {achievement.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right - Content */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              className="space-y-8"
+            >
+              <motion.div variants={itemVariants}>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-enhanced">
+                  Passionate Frontend Developer
+                </h3>
+                <div className="space-y-4 text-gray-700 dark:text-gray-200 leading-relaxed text-enhanced">
+                  <p>
+                    I’m Raikatun Naim Maimuna, a passionate Frontend Developer with hands-on experience in ReactJS, Node.js, Express.js, and MongoDB. I’m currently in my 2nd year of Honours at Southern University Bangladesh. My programming journey started with curiosity about how websites work, and over time it turned into a strong interest in building clean, user-friendly, and functional web applications.
                   </p>
-                </motion.div>
-              ))}
-            </div>
+                  <p>
+                 I enjoy building real-world projects like KrishiLink, Winter Pet Care Service, FreshBite, and a Smart Home & Ceremony Decoration Booking System, and I’m always eager to learn new technologies to improve performance and user experience.
+                  </p>
 
-            {/* Skills Mobile */}
-            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                Technical Skills
-              </h3>
-              <div className="space-y-4">
+                  <p>
+                    Outside of programming, I enjoy cooking, reading books, and researching different topics, which helps me stay creative, patient, and curious—qualities I also bring into my development work.
+                  </p>
+
+                  <p>I believe in continuous learning, clean code, and meaningful user experiences, and I’m excited to build products that make people’s lives easier.</p>
+                </div>
+              </motion.div>
+
+              {/* Skills Progress */}
+              <motion.div variants={itemVariants} className="space-y-6">
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white text-enhanced">
+                  Technical Expertise
+                </h4>
                 {skills.map((skill, index) => (
-                  <div id="skill" key={index}>
-                    <div className="flex justify-between mb-2">
-                      <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-gray-800 dark:text-gray-200 text-enhanced">
                         {skill.name}
                       </span>
-                      <span className="font-bold text-orange-500">
-                        <AnimatedCounter end={skill.level} duration={2} />
+                      <span className="text-sm font-bold text-gray-600 dark:text-gray-300">
+                        {skill.percentage}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                       <motion.div
-                        className="bg-linear-to-r from-orange-500 to-red-500 h-2 rounded-full"
+                        className={`h-3 rounded-full bg-gradient-to-r ${skill.color} shadow-sm`}
                         initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1.5, delay: 0.3 }}
+                        whileInView={{ width: `${skill.percentage}%` }}
+                        viewport={{ once: false, amount: 0.3 }}
+                        transition={{ duration: 1.5, delay: index * 0.2 }}
                       />
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-          </motion.section>
+              </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Services */}
-          <motion.section
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
-            variants={itemVariants}
+          {/* Services Section */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            className="space-y-12"
           >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              What I do!
-            </h2>
-            <div className="w-16 h-1 bg-linear-to-r from-orange-500 to-red-500 mt-2" />
-            <div className="space-y-4 mt-6">
+            <motion.div variants={itemVariants} className="text-center">
+              <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 text-enhanced">
+                What I <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Offer</span>
+              </h3>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-enhanced">
+                Comprehensive web development services to bring your ideas to life
+              </p>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {services.map((service, index) => (
                 <motion.div
                   key={index}
-                  className={`${service.bgColor} p-4 rounded-xl`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  variants={itemVariants}
+                  className="group glass backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 border border-white/30 dark:border-white/20 hover:shadow-2xl transition-all duration-500"
+                  whileHover={{ y: -10, scale: 1.02 }}
                 >
-                  <h3 className="font-bold flex items-center gap-2 text-gray-900 dark:text-white">
+                  <div className={`w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-r ${service.gradient} rounded-xl lg:rounded-2xl flex items-center justify-center text-white mb-4 lg:mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     {service.icon}
+                  </div>
+                  
+                  <h4 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-2 lg:mb-3 text-enhanced">
                     {service.title}
-                  </h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300 text-xs lg:text-sm leading-relaxed text-enhanced">
                     {service.description}
                   </p>
                 </motion.div>
               ))}
             </div>
-          </motion.section>
-        </motion.div>
+          </motion.div>
+        </div>
       </MyContainer>
-    </div>
+    </section>
   );
 };
 
 export default About;
-
