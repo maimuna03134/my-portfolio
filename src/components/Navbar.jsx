@@ -25,7 +25,18 @@ const Navbar = () => {
   );
 
   const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+    if (element) {
+      // Use Lenis smooth scroll if available, fallback to regular scroll
+      if (window.lenis) {
+        window.lenis.scrollTo(element, {
+          offset: -80, // Account for navbar height
+          duration: 1.5,
+        });
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
     setMobileMenuOpen(false);
     setActiveSection(id);
   };

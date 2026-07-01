@@ -107,7 +107,7 @@ export const projectsData = [
     technologies: ["React", " Node.js", "Express.js", "Mongodb"],
     fullDescription:
       "KrishiLink is a web platform that connects farmers, traders, and consumers where users can share crops, browse posts, and collaborate directly.",
-    liveLink: "https://crop-trading-platform-design.web.app/",
+    liveLink: "https://client-eight-woad-63.vercel.app/",
     githubLink:
       "https://github.com/maimuna03134/KrishiLink--Farmer-s-Growth-Connection-Platform.git",
     challenges:
