@@ -60,7 +60,7 @@ export const projectsData = [
     id: 1,
     name: "StyleDecor – Smart Home & Ceremony Decoration Booking System",
     image:
-      "https://i.ibb.co.com/XrtCsgTb/Style-Decor-cover-page.jpg",
+      "https://i.ibb.co/chPtHDxm/style-Decor.jpg",
     shortDescription: "Online home & ceremony decoration booking platform with secure payments",
     technologies: [
     "React",
@@ -101,7 +101,7 @@ export const projectsData = [
     id: 3,
     name: "KrishiLink – Farmer's Growth & Connection Platform",
     image:
-      "https://i.ibb.co.com/nNVD6T1d/krishilink.jpg",
+      "https://i.ibb.co/20QSPhFX/farmarlink.jpg",
     shortDescription:
       "KrishiLink connects farmers, traders, and consumers to share crops and collaborate easily.",
     technologies: ["React", " Node.js", "Express.js", "Mongodb"],
