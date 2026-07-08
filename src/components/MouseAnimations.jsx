@@ -88,7 +88,7 @@ const MouseAnimations = () => {
       {trailRefs.current.map((trail, i) => (
         <motion.div
           key={i}
-          className="fixed top-0 left-0 w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full pointer-events-none z-30 will-change-transform"
+          className="fixed top-0 left-0 w-2 h-2 bg-linear-to-r from-purple-400 to-pink-400 rounded-full pointer-events-none z-30 will-change-transform"
           style={{
             x: trail.x,
             y: trail.y,
