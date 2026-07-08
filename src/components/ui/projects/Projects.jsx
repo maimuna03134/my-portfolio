@@ -223,7 +223,7 @@ const Projects = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -284,7 +284,7 @@ const Projects = () => {
               </div>
 
               {/* Content */}
-              <div className="relative h-64 md:h-80 overflow-hidden shrink-0">
+              <div className="overflow-y-auto flex-1 min-h-0 p-8 space-y-8">
                 {/* Technologies */}
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 text-enhanced">
