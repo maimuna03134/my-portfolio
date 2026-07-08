@@ -9,7 +9,7 @@ import { useLenis } from './hooks/useLenis';
 import Navbar from './components/ui/Navbar';
 import Hero from './components/ui/Hero';
 import About from './components/ui/About';
-import Skills from './components/ui/Skills';
+import Skills from './components/ui/projects/Skills';
 import Education from './components/ui/Education';
 import Projects from './components/ui/projects/Projects';
 import Contact from './components/ui/Contact';
@@ -27,16 +27,16 @@ function App() {
 
   useEffect(() => {
     // Hide default cursor on desktop for custom cursor
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (!isMobile) {
-      document.body.style.cursor = 'none';
-    }
+    // const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // if (!isMobile) {
+    //   document.body.style.cursor = 'none';
+    // }
 
     // Disable default smooth scroll behavior since we're using Lenis
     document.documentElement.style.scrollBehavior = 'auto';
 
     return () => {
-      document.body.style.cursor = 'auto';
+      // document.body.style.cursor = 'auto';
       document.documentElement.style.scrollBehavior = 'smooth';
     };
   }, []);
@@ -46,7 +46,7 @@ function App() {
       <SmoothScroll>
         <div className="min-h-screen relative">
           {/* Mouse Animations - Only on desktop */}
-          <MouseAnimations />
+          {/* <MouseAnimations /> */}
 
           {/* Glass Morphism Background */}
           <div className="fixed inset-0 -z-10">

@@ -3,9 +3,7 @@
   themes: light --default;
 }
 
-html, body {
-  overflow-x: clip;   /* clip works with sticky, hidden does NOT */
-}
+
 /* Custom Styles */
 .bg-grid-pattern {
   background-image: 

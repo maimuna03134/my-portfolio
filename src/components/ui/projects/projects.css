@@ -1,0 +1,22 @@
+.projectsSwiper .swiper-pagination-bullet {
+  background: #ffffff;
+  opacity: 0.4;
+  width: 10px;
+  height: 10px;
+}
+
+.projectsSwiper .swiper-pagination-bullet-active {
+  background: linear-gradient(to right, #9333ea, #2563eb);
+  opacity: 1;
+  width: 28px;
+  border-radius: 6px;
+}
+
+.projectsSwiper .swiper-slide {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0.5;
+}
+
+.projectsSwiper .swiper-slide-active {
+  opacity: 1;
+}
