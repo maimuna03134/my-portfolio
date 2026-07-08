@@ -10,7 +10,7 @@ import {
   FaBook,
   FaTimes
 } from "react-icons/fa";
-import MyContainer from "./container/MyContainer";
+import MyContainer from "../container/MyContainer";
 
 const Education = () => {
   const [selectedCard, setSelectedCard] = useState(null);

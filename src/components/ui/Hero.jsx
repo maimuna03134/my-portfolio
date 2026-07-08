@@ -10,9 +10,9 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { socialLinks } from "../data/portfolioData";
-import myImage from '../assets/image.jpeg';
-import MyContainer from "./container/MyContainer";
+import { socialLinks } from "../../data/portfolioData";
+import myImage from '../../assets/image.jpeg';
+import MyContainer from "../container/MyContainer";
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

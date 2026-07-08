@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
-import MyContainer from "./container/MyContainer";
+import MyContainer from "../container/MyContainer";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Logo from "./Logo";
-import { useTheme } from "../contexts/ThemeContext";
+import Logo from "../Logo";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const { isDark, toggleTheme } = useTheme();
   const { scrollY } = useScroll();
-  
+
   // Transform navbar background based on scroll
   const navbarBg = useTransform(
     scrollY,
     [0, 100],
     ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.95)"]
   );
-  
+
   const navbarBgDark = useTransform(
     scrollY,
     [0, 100],
@@ -102,11 +102,10 @@ const Navbar = () => {
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-2 font-medium transition-all duration-300 text-enhanced ${
-                    activeSection === item.id
+                  className={`relative px-4 py-2 font-medium transition-all duration-300 text-enhanced ${activeSection === item.id
                       ? "text-blue-600 dark:text-blue-400"
                       : "text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400"
-                  }`}
+                    }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: -20 }}
@@ -125,7 +124,7 @@ const Navbar = () => {
                   )}
                 </motion.button>
               ))}
-              
+
               {/* Theme Toggle */}
               <motion.button
                 onClick={toggleTheme}
@@ -150,7 +149,7 @@ const Navbar = () => {
               >
                 {isDark ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-blue-600" />}
               </motion.button>
-              
+
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -178,11 +177,10 @@ const Navbar = () => {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => scrollToSection(item.id)}
-                    className={`text-left px-4 py-3 rounded-xl font-medium transition-all duration-300 text-enhanced ${
-                      activeSection === item.id
+                    className={`text-left px-4 py-3 rounded-xl font-medium transition-all duration-300 text-enhanced ${activeSection === item.id
                         ? "bg-blue-50/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
                         : "text-gray-800 dark:text-gray-100 hover:bg-white/20 dark:hover:bg-black/20"
-                    }`}
+                      }`}
                   >
                     {item.label}
                   </motion.button>

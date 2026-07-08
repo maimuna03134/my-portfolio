@@ -56,22 +56,22 @@ export const skillsData = {
 };
 
 export const projectsData = [
-   {
+  {
     id: 1,
     name: "StyleDecor – Smart Home & Ceremony Decoration Booking System",
     image:
       "https://i.ibb.co/chPtHDxm/style-Decor.jpg",
     shortDescription: "Online home & ceremony decoration booking platform with secure payments",
     technologies: [
-    "React",
-    "Node.js",
-    "Express.js",
-    "MongoDB",
-    "JavaScript",
-    "Tailwind CSS",
-    "Firebase",
-    "Stripe"
-  ],
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "JavaScript",
+      "Tailwind CSS",
+      "Firebase",
+      "Stripe"
+    ],
     fullDescription:
       "StyleDecor is a full-stack web application that allows users to browse decoration services, book professional decorators, make secure online payments, and track booking status in real time through role-based dashboards.",
     liveLink: "https://smart-home-decoration-service.web.app/",

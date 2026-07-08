@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MyContainer from './container/MyContainer';
+import MyContainer from '../container/MyContainer';
 import { 
   FaEnvelope, 
   FaPhone, 
@@ -12,6 +12,7 @@ import {
   FaClock,
 } from 'react-icons/fa';
 import { motion } from "framer-motion";
+
 
 const Contact = () => {
   const [showAlert, setShowAlert] = useState(false);
