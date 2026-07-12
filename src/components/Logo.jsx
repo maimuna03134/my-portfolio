@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const Logo = ({ className = "", size = "default" }) => {
   const sizes = {
@@ -22,12 +23,14 @@ const Logo = ({ className = "", size = "default" }) => {
   const currentSize = sizes[size];
 
   return (
+    
     <motion.div 
       className={`flex items-center gap-3 ${className}`}
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.2 }}
     >
       {/* Modern Logo Icon */}
+      
       <div className={`${currentSize.container} relative`}>
         {/* Gradient Background Circle */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl shadow-lg"></div>
@@ -35,7 +38,9 @@ const Logo = ({ className = "", size = "default" }) => {
         {/* Inner Design */}
         <div className="relative w-full h-full flex items-center justify-center">
           {/* Letter R with modern styling */}
-          <div className="text-white font-bold text-sm leading-none">
+          <Link to='/'>
+
+ <div className="text-white font-bold text-sm leading-none">
             <svg 
               viewBox="0 0 24 24" 
               className="w-6 h-6 fill-current"
@@ -44,6 +49,8 @@ const Logo = ({ className = "", size = "default" }) => {
               <path d="M6 4h7c2.21 0 4 1.79 4 4 0 1.5-.83 2.81-2.06 3.5L18 16h-2.5l-2.94-4H8v4H6V4zm2 2v4h5c1.1 0 2-.9 2-2s-.9-2-2-2H8z"/>
             </svg>
           </div>
+          </Link>
+         
           
           {/* Decorative dot */}
           <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full shadow-sm"></div>

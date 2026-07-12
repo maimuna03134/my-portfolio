@@ -1,37 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub, FaTimes, FaCode, FaEye } from "react-icons/fa";
+
+// Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+// Tilt (3D hover effect)
+import Tilt from "react-parallax-tilt";
+
+// GSAP (section entrance animation)
+import gsap from "gsap";
+
 import { projectsData } from "../../../data/portfolioData";
 import MyContainer from "../../container/MyContainer";
+import "./projects.css";
+import ProjectModal from "./ProjectModal";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  const sectionRef = useRef(null);
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
+  // GSAP entrance animation — fades in the whole section on mount
+  useEffect(() => {
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      sectionRef.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
+
+    return () => tl.kill();
+  }, []);
 
   return (
     <>
-      <section id="projects" className="py-20 relative overflow-hidden">
+      <section
+        ref={sectionRef}
+        id="projects"
+        className="py-20 relative overflow-hidden"
+      >
         {/* Background Elements */}
         <div className="absolute inset-0">
           <motion.div
@@ -40,10 +53,7 @@ const Projects = () => {
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
             }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-            }}
+            transition={{ duration: 8, repeat: Infinity }}
           />
           <motion.div
             className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-3xl"
@@ -51,10 +61,7 @@ const Projects = () => {
               scale: [1.2, 1, 1.2],
               opacity: [0.6, 0.3, 0.6],
             }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-            }}
+            transition={{ duration: 10, repeat: Infinity }}
           />
         </div>
 
@@ -66,7 +73,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-20"
+              className="text-center mb-16"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -87,7 +94,10 @@ const Projects = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 text-enhanced"
               >
-                Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">Projects</span>
+                Featured{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+                  Projects
+                </span>
               </motion.h2>
 
               <motion.p
@@ -101,117 +111,145 @@ const Projects = () => {
               </motion.p>
             </motion.div>
 
-            {/* Projects Grid */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            {/* Projects Coverflow Swiper */}
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              coverflowEffect={{
+                rotate: 30,
+                stretch: 0,
+                depth: 150,
+                modifier: 1,
+                slideShadows: false,
+              }}
+              pagination={{ clickable: true }}
+              modules={[EffectCoverflow, Pagination, Autoplay]}
+              className="projectsSwiper !pb-16"
             >
               {projectsData.map((project, index) => (
-                <motion.div
+                <SwiperSlide
                   key={project.id}
-                  variants={cardVariants}
-                  whileHover={{ y: -10 }}
-                  className="group relative glass backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/30 dark:border-white/20"
+                  className="!w-[280px] sm:!w-[340px] md:!w-[380px]"
                 >
-                  {/* Project Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <motion.img
-                      src={project.image}
-                      alt={project.name}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    />
+                  {/* 3D Tilt wrapper — everything inside is your exact card, untouched */}
+                  <Tilt
+                    className="w-full h-full"
+                    glareEnable={true}
+                    glareMaxOpacity={0.15}
+                    glareColor="#ffffff"
+                    glarePosition="all"
+                    scale={1.03}
+                    tiltMaxAngleX={10}
+                    tiltMaxAngleY={10}
+                    transitionSpeed={1200}
+                  >
+                    <div className="group relative glass backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/30 dark:border-white/20">
+                      {/* Project Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        <motion.img
+                          src={project.image}
+                          alt={project.name}
+                          className="w-full h-full object-cover"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                        />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                    {/* Project Number */}
-                    <div className="absolute top-4 left-4 w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
+                        {/* Project Number */}
+                        <div className="absolute top-4 left-4 w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                          {String(index + 1).padStart(2, "0")}
+                        </div>
 
-                    {/* Quick Actions - Always visible */}
-                    <div className="absolute top-4 right-4 flex gap-2">
-                      <motion.a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 glass backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-lg"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        title="Live Demo"
-                      >
-                        <FaEye />
-                      </motion.a>
-                      <motion.a
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 glass backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 dark:text-gray-100 hover:text-gray-900 dark:hover:text-white transition-colors shadow-lg"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        title="Source Code"
-                      >
-                        <FaGithub />
-                      </motion.a>
-                    </div>
-                  </div>
+                        {/* Quick Actions - Always visible */}
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <motion.a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 glass backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shadow-lg"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            title="Live Demo"
+                          >
+                            <FaEye />
+                          </motion.a>
+                          <motion.a
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 glass backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 dark:text-gray-100 hover:text-gray-900 dark:hover:text-white transition-colors shadow-lg"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            title="Source Code"
+                          >
+                            <FaGithub />
+                          </motion.a>
+                        </div>
+                      </div>
 
-                  {/* Project Content */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors text-enhanced">
-                      {project.name}
-                    </h3>
+                      {/* Project Content */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors text-enhanced">
+                          {project.name}
+                        </h3>
 
-                    <p className="text-gray-700 dark:text-gray-200 text-sm mb-4 line-clamp-2 text-enhanced">
-                      {project.shortDescription}
-                    </p>
+                        <p className="text-gray-700 dark:text-gray-200 text-sm mb-4 line-clamp-2 text-enhanced">
+                          {project.shortDescription}
+                        </p>
 
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-3 py-1 glass text-gray-800 dark:text-gray-100 rounded-full text-xs font-medium border border-white/20"
+                        {/* Technologies */}
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className="px-3 py-1 glass text-gray-800 dark:text-gray-100 rounded-full text-xs font-medium border border-white/20"
+                            >
+                              {tech.trim()}
+                            </span>
+                          ))}
+                          {project.technologies.length > 3 && (
+                            <span className="px-3 py-1 bg-purple-100/50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-medium">
+                              +{project.technologies.length - 3}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* View Details Button - Visible on Mobile/Tablet */}
+                        <motion.button
+                          onClick={() => setSelectedProject(project)}
+                          className="lg:hidden w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2.5 rounded-xl font-semibold text-sm hover:shadow-lg transition-all duration-300"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                         >
-                          {tech.trim()}
-                        </span>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <span className="px-3 py-1 bg-purple-100/50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-medium">
-                          +{project.technologies.length - 3}
-                        </span>
-                      )}
+                          View Details
+                        </motion.button>
+
+                        {/* Clickable Hover Indicator - Desktop Only */}
+                        <motion.button
+                          onClick={() => setSelectedProject(project)}
+                          className="hidden lg:flex absolute bottom-4 right-4 w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                          title="View Details"
+                        >
+                          <span className="text-sm font-bold">+</span>
+                        </motion.button>
+                      </div>
                     </div>
-
-                    {/* View Details Button - Visible on Mobile/Tablet */}
-                    <motion.button
-                      onClick={() => setSelectedProject(project)}
-                      className="lg:hidden w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2.5 rounded-xl font-semibold text-sm hover:shadow-lg transition-all duration-300"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      View Details
-                    </motion.button>
-
-                    {/* Clickable Hover Indicator - Desktop Only */}
-                    <motion.button
-                      onClick={() => setSelectedProject(project)}
-                      className="hidden lg:flex absolute bottom-4 right-4 w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
-                      whileHover={{ scale: 1.2 }}
-                      whileTap={{ scale: 0.9 }}
-                      title="View Details"
-                    >
-                      <span className="text-sm font-bold">+</span>
-                    </motion.button>
-                  </div>
-                </motion.div>
+                  </Tilt>
+                </SwiperSlide>
               ))}
-            </motion.div>
+            </Swiper>
           </div>
         </MyContainer>
       </section>
@@ -219,125 +257,11 @@ const Projects = () => {
       {/* Project Details Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
-            onClick={() => setSelectedProject(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0, y: 50 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 50 }}
-              onClick={(e) => e.stopPropagation()}
-              // ✅ limit height + flex column so inner body can scroll
-              className="glass backdrop-blur-xl rounded-3xl max-w-4xl w-full max-h-[90vh] shadow-2xl border border-white/30 dark:border-white/20 overflow-hidden flex flex-col"
-            >
-              {/* Header Image */}
-              <div className="relative h-64 md:h-80 overflow-hidden shrink-0">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                {/* Close Button */}
-                <motion.button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-6 right-6 w-12 h-12 glass backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 dark:text-gray-100 hover:text-red-500 dark:hover:text-red-400 transition-colors shadow-lg"
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <FaTimes className="text-xl" />
-                </motion.button>
-
-                {/* Project Title Overlay */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                    {selectedProject.name}
-                  </h2>
-                  <div className="flex gap-4">
-                    <motion.a
-                      href={selectedProject.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-2 glass backdrop-blur-sm text-white rounded-full font-medium flex items-center gap-2 hover:bg-white/30 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FaExternalLinkAlt /> Live Demo
-                    </motion.a>
-                    <motion.a
-                      href={selectedProject.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-2 glass backdrop-blur-sm text-white rounded-full font-medium flex items-center gap-2 hover:bg-white/30 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FaGithub /> Source Code
-                    </motion.a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="overflow-y-auto flex-1 min-h-0 p-8 space-y-8">
-                {/* Technologies */}
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 text-enhanced">
-                    <FaCode className="text-purple-600 dark:text-purple-400" />
-                    Technologies Used
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {selectedProject.technologies.map((tech, index) => (
-                      <motion.span
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="px-4 py-2 glass text-purple-800 dark:text-purple-200 rounded-xl font-medium text-sm border border-purple-200/50 dark:border-purple-500/30"
-                      >
-                        {tech.trim()}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-enhanced">
-                    Project Overview
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-200 leading-relaxed text-lg text-enhanced">
-                    {selectedProject.fullDescription}
-                  </p>
-                </div>
-
-                {/* Challenges & Solutions */}
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400 mb-4">
-                      Challenges Faced
-                    </h3>
-                    <p className="text-gray-700 dark:text-gray-200 leading-relaxed text-enhanced">
-                      {selectedProject.challenges}
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-green-600 dark:text-green-400 mb-4">
-                      Future Enhancements
-                    </h3>
-                    <p className="text-gray-700 dark:text-gray-200 leading-relaxed text-enhanced">
-                      {selectedProject.improvements}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+          <ProjectModal
+            key={selectedProject.id}
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
         )}
       </AnimatePresence>
     </>

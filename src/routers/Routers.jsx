@@ -1,6 +1,11 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Roots from "../roots/Roots";
+import About from "../components/ui/About";
+import Skills from "../components/ui/projects/Skills";
+import Projects from "../components/ui/projects/Projects";
+import Contact from "../components/ui/Contact";
+import Home from "../pages/Home";
 
 export const router = createBrowserRouter([
     {
@@ -11,8 +16,24 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 path: "/",
-                Component: App,
-            }
+                Component: Home,
+            },
+            {
+                path: "/about",
+                Component: About,
+            },
+            {
+                path: "/skills",
+                Component: Skills,
+            },
+            {
+                path: "/projects",
+                Component: Projects,
+            },
+            {
+                path: "/contact",
+                Component: Contact,
+            },
         ]
     }
     // {
